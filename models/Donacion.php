@@ -39,6 +39,19 @@ class Donacion {
         }
         return $this->donacionesP;
     }
+    public function listDonacionesSA(){
+        $res = $this->querties->listDonacionesSA($this->conn);
+        for($i = 0; $i <count($res); $i++){
+            $donacion = new Donacion($this->conn);
+            $donacion->setIdDonacion($res[$i]['idDonacion']);
+            $donacion->setIdDonante($res[$i]['idDonante']);
+            $donacion->setIdProveedor($res[$i]['idProveedor']);
+            $donacion->setFecha($res[$i]['fecha']);
+            $donacion->setCantidad($res[$i]['cantidad']);
+            $this->donacionesP[] = $donacion;
+        }
+        return $this->donacionesP;
+    }
 
     public function listDonacionesDonante($idDonante){
         $this->setIdDonante($idDonante);

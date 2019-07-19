@@ -3,6 +3,7 @@ include_once 'db/user.php';
 include_once 'controllers/user_session.php';
 $userSession = new UserSession();
 $user = new User();
+error_reporting(E_ALL ^ E_NOTICE);
 if(isset($_SESSION['user'])){
     $user->setUser($userSession->getCurrentUser());
     include_once 'views/home.html';
@@ -13,6 +14,7 @@ if(isset($_SESSION['user'])){
     if($user->userExists($userForm, $passForm)){
         $userSession->setCurrentUser($userForm);
         $user->setUser($userForm);
+        $userSession->setBanco($user->getidBanco());
         include_once 'views/home.html';
     }else{
         echo "No existe el usuario";

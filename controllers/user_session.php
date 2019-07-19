@@ -6,6 +6,9 @@ class UserSession{
     public function setCurrentUser($user){
         $_SESSION['user'] = $user;
     }
+    public function setBanco($idBanco){
+        $_SESSION['banco'] = $idBanco;
+    }
     public function getCurrentUser(){
         return $_SESSION['user'];
     }

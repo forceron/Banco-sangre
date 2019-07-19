@@ -19,6 +19,9 @@ class DonacionController{
     public function listDonacionesDonante($idDonante){
         return $this->donacion->listDonacionesDonante($idDonante);
     }
+    public function listDonacionSA(){
+        return $this->donacion->listDonacionesSA();    
+    }
 
     public function show($idDonacion){
         $this->donacion->show($idDonacion);

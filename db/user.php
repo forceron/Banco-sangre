@@ -35,6 +35,9 @@ class User extends DB{
     public function getApellidos(){
         return $this->apellidos;
     }
+    public function getIdBanco(){
+        return $this->idBanco;
+    }
     public function getInfo(){
         return ($this->nombres.'  '.$this->apellidos);
 

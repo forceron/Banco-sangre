@@ -25,6 +25,17 @@ class RegistroAlmacenamientoQuerties {
         }
         return $registroAlmacenamiento;
     }
+    function obtenerRegistro($conn, $idDonacion){
+        $stmt = $conn->prepare("SELECT idRegistro FROM RegistroAlmacenamiento WHERE idDonacion = ?; ");
+        $stmt->bind_param("i", $idDonacion);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $registroAlmacenamiento = [];
+        while ($row = $result->fetch_assoc()) {
+            $registroAlmacenamiento = $row;
+        }
+        return $registroAlmacenamiento;
+    }
 
     function insertRegistroAlmacenamiento($conn, $idDonacion, $idBanco) {
         $stmt = $conn->prepare("INSERT INTO RegistroAlmacenamiento (idDonacion, idBanco) VALUES (?, ?);");

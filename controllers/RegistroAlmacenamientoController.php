@@ -20,6 +20,9 @@ class RegistroAlmacenamientoController{
         $this->registroAlmacenamiento->show($idRegistro);
         return $this->registroAlmacenamiento;
     }
+    public function obtenerRegistro($idDonacion){
+        return $this->registroAlmacenamiento->obtenerRegistro($idDonacion);
+    }
 
     public function create($idDonacion, $idBanco){
         return $this->registroAlmacenamiento->create($idDonacion, $idBanco);

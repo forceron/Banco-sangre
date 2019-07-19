@@ -31,20 +31,20 @@
           <tr>
             <th scope="col">ID</th>
             <th scope="col">Cedula</th>
-            <th scope="col">Proveedor
+            <th scope="col">Proveedor</th>
             <th scope="col">Fecha</th>
             <th scope="col">Cantidad</th>
-        </tr>
+          </tr>
         </thead>
         <tbody>
           <?php
-          require $_SERVER['DOCUMENT_ROOT'].'/db/DBConn.php';
+          require_once $_SERVER['DOCUMENT_ROOT'].'/db/DBConn.php';
           require $_SERVER['DOCUMENT_ROOT'].'/controllers/DonacionController.php';
           $conn = create_connection();
           $administradorController = new DonacionController($conn);
-          $listaDon=$listDonacionesProveedor(1)->list();
+          $donante=$_POST['cedulaDonante'];
+          $listaDon=$administradorController->listDonacionesDonante($donante);
           foreach($listaDon as $doncion){
-
           ?>
           <tr>
             <th scope="row"><?php echo $doncion->getIdDonacion()?></th>
@@ -56,9 +56,10 @@
           <?php
           }
           ?>
-
         </tbody>
       </table>
+      
+      
     </div>
-    
-  </html>
+  </div>
+</html>

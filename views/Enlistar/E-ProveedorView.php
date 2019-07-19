@@ -21,7 +21,7 @@
           </a>
         </li>
         <li class="nav-item align-middle">
-          <h1 class="align-middle p-3">Registro donaciones </h1>
+          <h1 class="align-middle p-3">Listado Proveedor </h1>
         </li>
       </ul>
     </div>
@@ -29,29 +29,29 @@
       <table class="table">
         <thead>
           <tr>
-            <th scope="col">ID</th>
-            <th scope="col">Cedula</th>
-            <th scope="col">Proveedor
-            <th scope="col">Fecha</th>
-            <th scope="col">Cantidad</th>
+            <th scope="col">NIT</th>
+            <th scope="col">Razon social</th>
+            <th scope="col">Direccion </th>
+            <th scope="col">numero</th>
+            <th scope="col">f. acreditacion</th>
         </tr>
         </thead>
         <tbody>
           <?php
           require $_SERVER['DOCUMENT_ROOT'].'/db/DBConn.php';
-          require $_SERVER['DOCUMENT_ROOT'].'/controllers/DonacionController.php';
+          require $_SERVER['DOCUMENT_ROOT'].'/controllers/proveedorController.php';
           $conn = create_connection();
-          $administradorController = new DonacionController($conn);
-          $listaDon=$listDonacionesProveedor(1)->list();
-          foreach($listaDon as $doncion){
+          $administradorController = new proveedorController($conn);
+          $listaPro=$administradorController->list();
+          foreach($listaPro as $prov){
 
           ?>
           <tr>
-            <th scope="row"><?php echo $doncion->getIdDonacion()?></th>
-            <td> <?php echo $doncion->getIdDonante()?> </td>
-            <td><?php echo $doncion->getIdProveedor()?></td>
-            <td><?php echo $doncion->getFecha()?></td>
-            <td><?php echo $doncion->getCantidad()?></td>
+            <th scope="row"><?php echo $prov->getNit()?></th>
+            <td> <?php echo $prov->getRazonSocial()?> </td>
+            <td><?php echo $prov->getDireccion()?></td>
+            <td><?php echo $prov->getNumeroContacto()?></td>
+            <td><?php echo $prov->getLimiteAcreditacion()?></td>
           </tr>
           <?php
           }
@@ -59,6 +59,7 @@
 
         </tbody>
       </table>
+      <button onclick="location.href='../Crear/proveedorView.html';" type="button" class="btn btn-primary btn-lg btn-block">Agregar</button>
     </div>
     
   </html>

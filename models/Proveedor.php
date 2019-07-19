@@ -32,6 +32,7 @@ class Proveedor {
             $proveedor->setRazonSocial($res[$i]['razonSocial']);
             $proveedor->setDireccion($res[$i]['direccion']);
             $proveedor->setNumeroContacto($res[$i]['numeroContacto']);
+            $proveedor->setLimiteAcreditacion($res[$i]['limiteAcreditacion']);
             $proveedor->setHash($res[$i]['hash']);
             $this->proveedores[] = $proveedor;
         }

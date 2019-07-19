@@ -33,6 +33,10 @@ class RegistroAlmacenamiento {
         }
         return $this->registros;
     }
+    public function obtenerRegistro($idDonacion){
+        return $this->querties->obtenerRegistro($this->conn, $this->idDonacion);
+    }
+
 
     public function show($idRegistro){
         $this->setIdRegistro($idRegistro);

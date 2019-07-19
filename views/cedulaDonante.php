@@ -12,7 +12,7 @@ if(isset($_POST['cedulaDonante'])){
     $administradorController->show($cedula);
     if($administradorController->donanteExists()){
       echo "paso";
-      include('Crear/DonacionView.html');
+      include('Crear/DonacionView.php');
     }else{
       include('Crear/DonanteView.html');
     }

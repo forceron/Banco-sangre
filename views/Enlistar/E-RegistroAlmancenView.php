@@ -21,7 +21,7 @@
           </a>
         </li>
         <li class="nav-item align-middle">
-          <h1 class="align-middle p-3">Registro donaciones </h1>
+          <h1 class="align-middle p-3">Almacen del banco </h1>
         </li>
       </ul>
     </div>
@@ -30,28 +30,26 @@
         <thead>
           <tr>
             <th scope="col">ID</th>
-            <th scope="col">Cedula</th>
-            <th scope="col">Proveedor
-            <th scope="col">Fecha</th>
-            <th scope="col">Cantidad</th>
+            <th scope="col">ID donacion</th>
+            <th scope="col">tipo </th>
+            
         </tr>
         </thead>
         <tbody>
           <?php
           require $_SERVER['DOCUMENT_ROOT'].'/db/DBConn.php';
-          require $_SERVER['DOCUMENT_ROOT'].'/controllers/DonacionController.php';
+          require $_SERVER['DOCUMENT_ROOT'].'/controllers/RegistroAlmacenamientoController.php';
           $conn = create_connection();
-          $administradorController = new DonacionController($conn);
-          $listaDon=$listDonacionesProveedor(1)->list();
-          foreach($listaDon as $doncion){
+          $administradorController = new RegistroAlmacenamientoController($conn);
+          session_start();
 
+          $listaDon=$administradorController->listRegistroAlmacenamientoBanco($_SESSION['banco']);
+          foreach($listaDon as $doncion){
           ?>
           <tr>
-            <th scope="row"><?php echo $doncion->getIdDonacion()?></th>
-            <td> <?php echo $doncion->getIdDonante()?> </td>
-            <td><?php echo $doncion->getIdProveedor()?></td>
-            <td><?php echo $doncion->getFecha()?></td>
-            <td><?php echo $doncion->getCantidad()?></td>
+            <th scope="row"><?php echo $doncion->getIdRegistro()?></th>
+            <td> <?php echo $doncion->getIdDonacion()?> </td>
+            <td><?php echo $doncion->getIdBanco()?></td>
           </tr>
           <?php
           }

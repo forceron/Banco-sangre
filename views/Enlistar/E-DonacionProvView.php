@@ -11,7 +11,6 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   </head>
-  <!-- Page content holder -->
   <div class="page-header">
     <div class="p-5" id="content">
       <ul style="background-color:rgba(255, 255, 255, 0.1);"class="nav nav-tabs" role="tablist">
@@ -26,39 +25,27 @@
       </ul>
     </div>
     <div class="container">
-      <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">ID</th>
-            <th scope="col">Cedula</th>
-            <th scope="col">Proveedor
-            <th scope="col">Fecha</th>
-            <th scope="col">Cantidad</th>
-        </tr>
-        </thead>
-        <tbody>
-          <?php
-          require $_SERVER['DOCUMENT_ROOT'].'/db/DBConn.php';
-          require $_SERVER['DOCUMENT_ROOT'].'/controllers/DonacionController.php';
-          $conn = create_connection();
-          $administradorController = new DonacionController($conn);
-          $listaDon=$listDonacionesProveedor(1)->list();
-          foreach($listaDon as $doncion){
-
-          ?>
-          <tr>
-            <th scope="row"><?php echo $doncion->getIdDonacion()?></th>
-            <td> <?php echo $doncion->getIdDonante()?> </td>
-            <td><?php echo $doncion->getIdProveedor()?></td>
-            <td><?php echo $doncion->getFecha()?></td>
-            <td><?php echo $doncion->getCantidad()?></td>
-          </tr>
-          <?php
-          }
-          ?>
-
-        </tbody>
-      </table>
+      <form action="E-DonacionProvViewSel.php" method="POST" class="was-validated" id="formDon">
+        
+        <div class="form-group">
+          <label for="index">Proveedor:</label>
+          <select class="form-control" name="proveedorlist" form="formDon" placeholder="Seleccione el Proveedor">
+            <?php
+            require_once $_SERVER['DOCUMENT_ROOT'].'/db/DBConn.php';
+            require $_SERVER['DOCUMENT_ROOT'].'/controllers/ProveedorController.php';
+            $conn = create_connection();
+            $administradorController = new ProveedorController($conn);
+            $listaProv=$administradorController->list();
+            foreach($listaProv as $proveedor){
+            ?>
+            <option value=<?php echo $proveedor->getNit()?>  ><?php echo $proveedor->getRazonSocial()?></option>
+            <?php
+            }
+            ?>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-primary  btn-block" onclick=""> Consultar </button>
+      </form>      
     </div>
-    
-  </html>
+  </div>
+</html>

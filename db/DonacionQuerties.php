@@ -5,6 +5,7 @@ class DonacionQuerties {
     function listDonacionesProveedor($conn, $idProveedor){
         $stmt = $conn->prepare("SELECT * FROM Donacion WHERE idProveedor = ?; ");
         $stmt->bind_param("i", $idProveedor);
+        //$stmt = $conn->prepare("SELECT * FROM Donacion; ");
         $stmt->execute();
         $result = $stmt->get_result();
         $donaciones = [];
@@ -17,6 +18,16 @@ class DonacionQuerties {
     function listDonacionesDonante($conn, $idDonante){
         $stmt = $conn->prepare("SELECT * FROM Donacion WHERE idDonante = ?; ");
         $stmt->bind_param("i", $idDonante);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $donaciones = [];
+        while ($row = $result->fetch_assoc()) {
+            $donaciones[] = $row;
+        }
+        return $donaciones;
+    }
+     function listDonacionesSA($conn){
+        $stmt = $conn->prepare("SELECT * FROM donacion WHERE donacion.idDonacion NOT IN(select registroalmacenamiento.idDonacion from registroalmacenamiento); ");
         $stmt->execute();
         $result = $stmt->get_result();
         $donaciones = [];
